@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import api from "../api";
 
+const formatNumber = (value) =>
+  new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 3 }).format(
+    typeof value === "string" ? parseFloat(value.replace(",", ".")) : value,
+  );
+
 const statusOptions = [
   { value: "", label: "Todos" },
   { value: "Aprovado", label: "Aprovado" },
@@ -293,10 +298,10 @@ export default function AdminReport() {
                       {transacao.Data}
                     </td>
                     <td className="px-4 py-4 text-sm text-gray-900">
-                      {transacao.Pontos}
+                      {formatNumber(transacao.Pontos)}
                     </td>
                     <td className="px-4 py-4 text-sm text-gray-900">
-                      {transacao.Dinheiro}
+                      {transacao.Dinheiro || "R$ 0,00"}
                     </td>
                     <td className="px-4 py-4 text-sm">
                       <span
