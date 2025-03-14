@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
+import DashboardHeader from "../components/DashboardHeader";
 
 const statusOptions = [
   { value: "", label: "Todos" },
@@ -21,6 +22,12 @@ export default function UserDashboard() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const handleLogout = useCallback(() => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login", { replace: true });
+  }, [navigate]);
 
   const fetchData = useCallback(async () => {
     try {
@@ -67,10 +74,16 @@ export default function UserDashboard() {
 
   return (
     <div className="p-6">
+      <DashboardHeader
+        title="Painel do Usuário"
+        subtitle="Bem-vindo à sua área de transações"
+        onLogout={handleLogout}
+      />
+
       {/* Cabeçalho com saldo */}
       <div className="bg-blue-50 p-4 rounded-lg mb-6 shadow-md">
         <h1 className="text-2xl font-semibold text-blue-800">
-          Saldo Disponível: {balance} pontos
+          Saldo Disponível: {balance || 0} {balance === 1 ? "ponto" : "pontos"}
         </h1>
         <p className="text-sm text-blue-600 mt-1">
           (Somente transações aprovadas são contabilizadas)
@@ -165,6 +178,9 @@ export default function UserDashboard() {
                       Descrição
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                      Valor (R$)
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                       Pontos
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
@@ -172,16 +188,26 @@ export default function UserDashboard() {
                     </th>
                   </tr>
                 </thead>
+
                 <tbody className="bg-white divide-y divide-gray-200">
                   {transactions.map((t) => (
                     <tr key={t.id} className="hover:bg-gray-50">
                       <td className="px-4 py-4 text-sm text-gray-900">
                         {new Date(t.transactionDate).toLocaleDateString(
                           "pt-BR",
+                          {
+                            timeZone: "UTC",
+                          },
                         )}
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-900">
                         {t.description}
+                      </td>
+                      <td className="px-4 py-4 text-sm text-gray-900">
+                        {parseFloat(t.moneyValue).toLocaleString("pt-BR", {
+                          style: "currency",
+                          currency: "BRL",
+                        })}
                       </td>
                       <td className="px-4 py-4 text-sm text-gray-900">
                         {t.pointsValue.toLocaleString("pt-BR")}
