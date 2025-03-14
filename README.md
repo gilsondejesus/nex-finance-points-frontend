@@ -1,5 +1,7 @@
 📱 Frontend - Nex-Points
 
+Vídeo de Apresentação do Projeto: https://drive.google.com/file/d/1X_wcRFx2ZTG3-JcoEdyca_w2kPHsdUdV/view
+
 Visão Geral:
 
 Aplicação React para gestão de pontos, desenvolvida com Vite e Tailwind CSS. Funcionalidades principais:
