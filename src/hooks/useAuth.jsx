@@ -1,4 +1,5 @@
-import { jwtDecode } from "jwt-decode";
+// Alterar para:
+import jwtDecode from "jwt-decode";
 
 export const useAuth = () => {
   const validateToken = (token) => {
@@ -11,14 +12,8 @@ export const useAuth = () => {
   };
 
   const getCurrentUser = () => {
-    const token = localStorage.getItem("token");
-    if (!token) return null;
-
-    try {
-      return jwtDecode(token);
-    } catch {
-      return null;
-    }
+    const user = localStorage.getItem("user");
+    return user ? JSON.parse(user) : null;
   };
 
   return { validateToken, getCurrentUser };
