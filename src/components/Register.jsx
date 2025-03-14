@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import InputMask from "react-input-mask";
+import InputMask from "@mona-health/react-input-mask";
+import api from "../api";
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -20,9 +20,13 @@ export default function Register() {
       setLoading(true);
       setError("");
 
-      await axios.post("http://localhost:3000/auth/register", form);
+      await api.post("/auth/register", form);
 
-      navigate("/", { state: { success: "Registro realizado com sucesso!" } });
+      navigate("/login", {
+        state: {
+          success: "Registro realizado com sucesso! Faça login.",
+        },
+      });
     } catch (err) {
       setError(err.response?.data?.error || "Erro no registro");
     } finally {
@@ -56,6 +60,7 @@ export default function Register() {
               required
               placeholder="Digite seu nome"
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
             />
           </div>
@@ -83,6 +88,7 @@ export default function Register() {
               required
               placeholder="seu@email.com"
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
             />
           </div>
@@ -96,6 +102,7 @@ export default function Register() {
               required
               placeholder="••••••••"
               className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
             />
           </div>
@@ -114,7 +121,7 @@ export default function Register() {
           Já tem uma conta?{" "}
           <button
             type="button"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/login")}
             className="text-blue-600 hover:text-blue-700 font-medium"
           >
             Faça login aqui
