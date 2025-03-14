@@ -1,12 +1,62 @@
-# React + Vite
+📱 Frontend - Nex-Points
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Visão Geral:
 
-Currently, two official plugins are available:
+Aplicação React para gestão de pontos, desenvolvida com Vite e Tailwind CSS. Funcionalidades principais:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Autenticação JWT
 
-## Expanding the ESLint configuration
+- Visualização de extrato
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Gestão de carteira digital
+
+- Upload de transações (admin)
+
+Interface responsiva
+
+📋 Pré-requisitos:
+ - Node.js v18+
+ - npm v9+
+ - Backend em execução
+
+⚙️ Instalação:
+
+- git clone 
+- npm install
+  
+🔧 Configuração
+- Crie o arquivo .env na raiz:
+VITE_API_URL=http://localhost:3000
+
+🖥 Execução:
+
+# Ambiente de desenvolvimento
+- npm run dev
+Aplicação disponível em: http://localhost:5173
+
+
+🛠 Troubleshooting Comum
+
+Problema: Erro de CORS
+
+Solução:
+
+1 - Verifique a variável CORS_ORIGIN no backend
+
+2 - Certifique-se de incluir o domínio do frontend
+
+3 - Reinicie o servidor backend
+
+Problema: Conexão com banco de dados
+Solução:
+
+1 - Verifique as credenciais no .env
+
+2 - Teste a conexão localmente
+
+3 - Para bancos na nuvem, verifique:
+
+- Requer SSL
+
+- Whitelist de IPs
+
