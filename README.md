@@ -1,5 +1,14 @@
 📱 Frontend - Nex-Points
 
+Deploy: https://nex-front.vercel.app
+Backend:https://github.com/gilsondejesus/nex-finance-points-backend
+
+Login usuário com dados disponíveis para consulta: 
+Usuário 1
+CPF: 111.111.111-11
+Email: user@teste.com
+Senha: @user_test
+
 Vídeo de Apresentação do Projeto: https://drive.google.com/file/d/1X_wcRFx2ZTG3-JcoEdyca_w2kPHsdUdV/view
 
 Visão Geral:
