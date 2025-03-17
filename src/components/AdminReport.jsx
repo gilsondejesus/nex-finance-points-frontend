@@ -1,10 +1,16 @@
 import React, { useState, useEffect, useCallback } from "react";
 import api from "../api";
 
-const formatNumber = (value) =>
-  new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 3 }).format(
-    typeof value === "string" ? parseFloat(value.replace(",", ".")) : value,
-  );
+const formatNumber = (value) => {
+  const numberValue = typeof value === 'string' 
+    ? parseFloat(value.replace(/\./g, '').replace(',', '.')) 
+    : value;
+  
+  return new Intl.NumberFormat("pt-BR", { 
+    minimumFractionDigits: 3,
+    maximumFractionDigits: 3
+  }).format(numberValue);
+};
 
 const statusOptions = [
   { value: "", label: "Todos" },
@@ -96,7 +102,7 @@ export default function AdminReport() {
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-3 gap-4"
         >
-          {/* CPF */}
+          {/* Campos de Filtro */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               CPF
@@ -111,7 +117,6 @@ export default function AdminReport() {
             />
           </div>
 
-          {/* Datas */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Data Inicial
@@ -138,7 +143,6 @@ export default function AdminReport() {
             />
           </div>
 
-          {/* Pontos */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Pontos Mínimos
@@ -165,7 +169,6 @@ export default function AdminReport() {
             />
           </div>
 
-          {/* Dinheiro */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Valor Mínimo (R$)
@@ -192,7 +195,6 @@ export default function AdminReport() {
             />
           </div>
 
-          {/* Status */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Status
@@ -211,7 +213,6 @@ export default function AdminReport() {
             </select>
           </div>
 
-          {/* Botões */}
           <div className="md:col-span-3 flex gap-2">
             <button
               type="submit"
